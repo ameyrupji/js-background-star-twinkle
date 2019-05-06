@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+}
+  
+#previous-container, 
+#next-container {
+    background-color: #777;
+    color: #fff;
+    display: block;
+    min-height: 200px;
+    padding: 20px 10px;
+}
+
+#some-container {
+    background-color: #eee;
+    color: #333;
+    border-top: 3px solid #aaa;
+    border-bottom: 3px solid #aaa;
+    display: block;
+    min-height: 200px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.backdround-images-amimation-container {
+    min-height:100%;
+    display:block;
+}
+
+.background-images-container {
+    display: block;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    z-index: 99;
+    top: -300px;
+    margin: 0 auto;
+}
+
+.data-container {
+    display: block;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    z-index: 100;
+    margin: 100px 30px;
+}
+
+.background-images {
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    background-color: #999;
+    display: inline-block;
+    visibility: hidden;
+}
+
+.animate-flicker {
+    -webkit-animation: flickerAnimation 10s infinite;
+    -moz-animation: flickerAnimation 10s infinite;
+    -o-animation: flickerAnimation 10s infinite;
+    animation: flickerAnimation 10s infinite;
+}
+
+@keyframes flickerAnimation {
+    0%   { opacity:0; visibility: visible; }
+    70%  { opacity:.5; }
+    100% { opacity:0; }
+}
+@-o-keyframes flickerAnimation{
+    0%   { opacity:0; visibility: visible; }
+    70%  { opacity:.5; }
+    100% { opacity:0; }
+}
+@-moz-keyframes flickerAnimation{
+    0%   { opacity:0; visibility: visible; }
+    70%  { opacity:.5; }
+    100% { opacity:0; }
+}
+@-webkit-keyframes flickerAnimation{
+    0%   { opacity:0; visibility: visible; }
+    70%  { opacity:.5; }
+    100% { opacity:0; }
+}  
