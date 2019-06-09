@@ -4,7 +4,6 @@ $(window).on('load', function(){
 
     if (!container.length) {
       var container_html = '<div class="'+containerClass+'"></div>'
-      /* console.log(container_html) */
       container = $(container_html).appendTo(appendToElement);
     }
 
@@ -19,7 +18,6 @@ $(window).on('load', function(){
 
       if (!container.length) {
         var container_html = '<div class="'+containerClass+'" id="'+ containerClass +'-'+ i +'"></div>'
-        /* console.log(container_html) */
         container = $(container_html).appendTo(appendToElement);
       }
       containers.push(container)
@@ -42,8 +40,17 @@ $(window).on('load', function(){
 
   var active_boxes_percentage = 30;
 
-  var img_width = 100;
-  var img_height = 100;
+  var image_width = 100;
+  var image_height = 100;
+  
+  var image_padding_left = 20;
+  var image_padding_right = 20;
+
+  var image_padding_top = 20;
+  var image_padding_bottom = 20;
+
+  var image_width_padded = image_width + image_padding_left + image_padding_right
+  var image_height_padded = image_height + image_padding_top + image_padding_bottom
 
   var $someContainer = $('#some-container')
   var width = $someContainer.width()
@@ -51,24 +58,26 @@ $(window).on('load', function(){
 
   var $backdroundImagesAmimationContainer = $('.backdround-images-amimation-container')
 
-  var boxes_x = parseInt( width / img_width )
-  var boxes_y = parseInt(height / img_height)
+  var boxes_x = Math.floor( width / image_width_padded ) + 2
+  var boxes_y = Math.floor(height / image_height_padded) + 2
   var boxes_count = boxes_x * boxes_y
 
   var $backdroundImagesContainer = getContainer('background-images-container', $backdroundImagesAmimationContainer);
 
+  var left = Math.abs(Math.floor( (width - (boxes_x * image_width_padded) ) / 2 ))
+  var new_width = width + (image_width_padded *2)
+
+
   $someContainer.css('height', height + 'px')
-  $backdroundImagesContainer.css('top', '-' + height + 'px')
+  $backdroundImagesContainer.css('top', '-' + (height + 60) + 'px')
+  $backdroundImagesContainer.css('left', '-' + left + 'px')
+  $backdroundImagesContainer.css('width', new_width + 'px')
 
   var $backdroundImages = getContainers('background-images', $backdroundImagesContainer, boxes_count)
-  /* console.log($backdroundImages) */
 
   var active_boxes_count = parseInt((boxes_count * active_boxes_percentage) / 100)
 
   shuffleArray($backdroundImages)
-  /* console.log($backdroundImages) */
-  /* var $activeArraySlice = $backdroundImages.slice(0, active_boxes_count)
-  console.log($activeArraySlice.length) */
 
   for(var j  = 0; j < parseInt(100 / active_boxes_percentage) + 1 ; j++) {
     
