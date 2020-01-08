@@ -39,7 +39,7 @@ var starTwinkle = (function () {
             container = $(container_html).appendTo(appendToElement);
           }
           count ++;
-          if(count > Model.starImageCount) {
+          if(count >= Model.starImageCount) {
               count =0
           }
           containers.push(container)

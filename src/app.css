@@ -49,7 +49,8 @@ body {
     width: 100px;
     height: 100px;
     margin: 20px;
-    background-color: #999;
+    /* background-color: #999; */
+    background-image: url('./12345.png');
     display: inline-block;
     visibility: hidden;
 }
@@ -81,3 +82,26 @@ body {
     70%  { opacity:.5; }
     100% { opacity:0; }
 }  
+
+
+.star-image-count-0 {
+    background-position: 0 0;
+}
+
+.star-image-count-1 {
+    background-position: -100px 0;
+}
+
+.star-image-count-2 {
+    background-position: -200px 0;
+}
+
+.star-image-count-3 {
+    background-position: -300px 0;
+}
+
+.star-image-count-4 {
+    background-position: -400px 0;
+}
+
+
