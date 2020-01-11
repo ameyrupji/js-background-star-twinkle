@@ -2,14 +2,15 @@ var starTwinkle = (function () {
     "use strict"
   
     var Model = {
-      activeBoxesPercentage: 30,
+      activeBoxesPercentage: 25,
       starWidth: 100,
       starHeight: 100,
       starPaddingTop: 20,
       starPaddingRight: 20,
       starPaddingBottom: 20,
       starPaddingLeft: 20,
-      starImageCount: 5
+      starImageCount: 5,
+      imageUrl: ""
     },
     View = {
       twinkleContainer: $('#some-container'),
@@ -101,8 +102,21 @@ var starTwinkle = (function () {
           }
         }
       },
+      createCssClasses: function createCssClasses() {
+        console.log('In createCssClasses()')
+        var styleHtml = '<style type="text/css"> '
+        styleHtml += '.background-images { width: '+ Model.starWidth +'px; height: '+ Model.starHeight +'px; background-image: url("'+ Model.imageUrl +'"); }'
+        for(var i=0; i< Model.starImageCount; i++) {
+          var styleCss = '.star-image-count-'+ i +'{ background-position: -' + Model.starWidth * i + 'px 0px; } '
+          styleHtml += styleCss
+        }
+        styleHtml += '</style>'
+        $(styleHtml).appendTo("head");
+      },
       init: function init(config) {
-        console.log('In init('+config+')')
+        Model = config
+        Controller.createCssClasses()
+        console.log('In init('+ JSON.stringify(config) +')')
         Controller.makeItTwinkle()
       }
     }
