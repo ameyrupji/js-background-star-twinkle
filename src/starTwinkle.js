@@ -5,12 +5,13 @@ var starTwinkle = (function () {
       activeBoxesPercentage: 25,
       starWidth: 100,
       starHeight: 100,
-      starPaddingTop: 20,
-      starPaddingRight: 20,
-      starPaddingBottom: 20,
-      starPaddingLeft: 20,
+      starMarginTop: 20,
+      starMarginRight: 20,
+      starMarginBottom: 20,
+      starMarginLeft: 20,
       starImageCount: 5,
-      imageUrl: ""
+      imageUrl: "",
+      imageDarkUrl: ""
     },
     View = {
       twinkleContainer: $('#some-container'),
@@ -27,21 +28,25 @@ var starTwinkle = (function () {
     
         return container
       },
+      getRandomArbitrary: function getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+      },
+      getRandomInt: function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      },
       getContainers: function getContainers(containerClass, appendToElement, number) {
         var containers = []
         var i;
 
-        var count = 0
         for (i = 0; i < number; i++) { 
           var container = $('#'+containerClass+'-'+ i)
-            
+          
+          var randomImageCount = Controller.getRandomInt(0,5)
           if (!container.length) {
-            var container_html = '<div class="'+containerClass+ " star-image-count-"+ count+ '" id="'+ containerClass +'-'+ i +'"></div>'
+            var container_html = '<div class="'+containerClass+ " star-image-count-"+ randomImageCount+ '" id="'+ containerClass +'-'+ i +'"></div>'
             container = $(container_html).appendTo(appendToElement);
-          }
-          count ++;
-          if(count >= Model.starImageCount) {
-              count =0
           }
           containers.push(container)
         }
@@ -61,8 +66,8 @@ var starTwinkle = (function () {
       },
       makeItTwinkle: function makeItTwinkle() {
         console.log('In makeItTwinkle()')
-        var imageWidthPadded= Model.starWidth + Model.starPaddingLeft + Model.starPaddingRight
-        var imageHeightPadded= Model.starHeight + Model.starPaddingTop + Model.starPaddingBottom
+        var imageWidthPadded= Model.starWidth + Model.starMarginLeft + Model.starMarginRight
+        var imageHeightPadded= Model.starHeight + Model.starMarginTop + Model.starMarginBottom
   
         var width = View.twinkleContainer.width()
         var height = View.twinkleContainer.height()
@@ -102,10 +107,17 @@ var starTwinkle = (function () {
           }
         }
       },
+      darkModeCss: function darkModeCss(cssString) {
+        return '@media (prefers-color-scheme: dark) {' + cssString + '}'
+      },
+      createBackgroundImagesCss: function createBackgroundImagesCss(starWidth, starHeight, imageUrl, starMarginTop, starMarginRight, starMarginBottom, starMarginLeft) {
+        return '.background-images { width: '+ starWidth +'px; height: '+ starHeight +'px; background-image: url("'+ imageUrl +'"); margin: '+ starMarginTop +'px '+ starMarginRight +'px '+ starMarginBottom +'px '+ starMarginLeft +'px; }'
+      },
       createCssClasses: function createCssClasses() {
         console.log('In createCssClasses()')
         var styleHtml = '<style type="text/css"> '
-        styleHtml += '.background-images { width: '+ Model.starWidth +'px; height: '+ Model.starHeight +'px; background-image: url("'+ Model.imageUrl +'"); }'
+        styleHtml += Controller.createBackgroundImagesCss(Model.starWidth, Model.starHeight, Model.imageUrl, Model.starMarginTop, Model.starMarginRight, Model.starMarginBottom, Model.starMarginLeft)
+        styleHtml += Controller.darkModeCss(Controller.createBackgroundImagesCss(Model.starWidth, Model.starHeight, Model.imageDarkUrl, Model.starMarginTop, Model.starMarginRight, Model.starMarginBottom, Model.starMarginLeft))
         for(var i=0; i< Model.starImageCount; i++) {
           var styleCss = '.star-image-count-'+ i +'{ background-position: -' + Model.starWidth * i + 'px 0px; } '
           styleHtml += styleCss

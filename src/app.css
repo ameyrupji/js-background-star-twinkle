@@ -22,59 +22,9 @@ body {
     overflow: hidden;
 }
 
-.background-images-animation-container {
-    display:block;
-}
 
-.background-images-container {
-    display: block;
-    position: relative;
-    top: 0px;
-    left: 0px;
-    z-index: 99;
-    top: -300px;
-    margin: 0 auto;
-}
-
-.data-container {
-    display: block;
-    position: relative;
-    top: 0px;
-    left: 0px;
-    z-index: 100;
-    margin: 100px 30px;
-}
-
-.background-images {
-    margin: 20px;
-    display: inline-block;
-    visibility: hidden;
-}
-
-.animate-flicker {
-    -webkit-animation: flickerAnimation 10s infinite;
-    -moz-animation: flickerAnimation 10s infinite;
-    -o-animation: flickerAnimation 10s infinite;
-    animation: flickerAnimation 10s infinite;
-}
-
-@keyframes flickerAnimation {
-    0%   { opacity:0; visibility: visible; }
-    70%  { opacity:.5; }
-    100% { opacity:0; }
-}
-@-o-keyframes flickerAnimation{
-    0%   { opacity:0; visibility: visible; }
-    70%  { opacity:.5; }
-    100% { opacity:0; }
-}
-@-moz-keyframes flickerAnimation{
-    0%   { opacity:0; visibility: visible; }
-    70%  { opacity:.5; }
-    100% { opacity:0; }
-}
-@-webkit-keyframes flickerAnimation{
-    0%   { opacity:0; visibility: visible; }
-    70%  { opacity:.5; }
-    100% { opacity:0; }
+@media (prefers-color-scheme: dark) {
+    #some-container {
+        background-color: #161719
+    }
 }
