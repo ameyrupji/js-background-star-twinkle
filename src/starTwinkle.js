@@ -113,13 +113,13 @@ var starTwinkle = (function () {
       },
       createCssClasses: function createCssClasses() {
         var backgroundImagesContainer = 'background-images-animated-container'
-        var heightCssContainer = parseInt($(Model.cssContainer).height())
+        var heightCssContainer = parseInt($(Model.cssContainer).outerHeight())
         var outerHeightCssContainer = parseInt($(Model.cssContainer).outerHeight())
         var topBackgroundImageContainer = parseInt($(Model.cssContainer).css("margin-top")) + parseInt($(Model.cssContainer).css("padding-top"))
 
         var styleHtml = '<style type="text/css"> '
         
-        var backgroundImagesContainerCss=  '.' + backgroundImagesContainer +' {height: '+ outerHeightCssContainer +'px; top:-'+ (topBackgroundImageContainer+50 )+'px; width: 110%;}'
+        var backgroundImagesContainerCss=  '.' + backgroundImagesContainer +' {height: '+ outerHeightCssContainer +'px; top:-'+ topBackgroundImageContainer+'px; width: 110%;}'
         styleHtml += backgroundImagesContainerCss
 
         var backgroundDataContainerCss=  Model.cssContainerData +' {position: relative; top: -'+ outerHeightCssContainer +'px;}'
