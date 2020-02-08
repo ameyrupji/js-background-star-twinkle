@@ -2,6 +2,8 @@ var starTwinkle = (function () {
     "use strict"
   
     var Model = {
+      cssContainer: "",
+      cssContainerData: "",
       activeBoxesPercentage: 25,
       starWidth: 100,
       starHeight: 100,
@@ -14,7 +16,6 @@ var starTwinkle = (function () {
       imageDarkUrl: ""
     },
     View = {
-      twinkleContainer: $('#some-container'),
       backgroundImagesAnimationContainer: $('.background-images-animation-container')
     },
     Controller = {
@@ -65,28 +66,25 @@ var starTwinkle = (function () {
         }
       },
       makeItTwinkle: function makeItTwinkle() {
+        backgroundImagesContainer = 'background-images-animated-container'
+
         console.log('In makeItTwinkle()')
+
+        $(Model.cssContainer).prepend('<div class="'+backgroundImagesContainer+'"></div>')
+
         var imageWidthPadded= Model.starWidth + Model.starMarginLeft + Model.starMarginRight
         var imageHeightPadded= Model.starHeight + Model.starMarginTop + Model.starMarginBottom
   
-        var width = View.twinkleContainer.width()
-        var height = View.twinkleContainer.height()
+        var width = $(Model.cssContainer).width()
+        var height = $(Model.cssContainer).outerHeight()
   
-        var boxes_x = Math.floor( width / imageWidthPadded ) + 2
-        var boxes_y = Math.floor(height / imageHeightPadded) + 2
+        var boxes_x = Math.ceil(width / imageWidthPadded ) 
+        var boxes_y = Math.ceil(height / imageHeightPadded)
         var boxes_count = boxes_x * boxes_y
         
         var activeBoxesCount = parseInt((boxes_count * Model.activeBoxesPercentage) / 100)
   
-        var backgroundImagesContainer = Controller.getContainer('background-images-container', View.backgroundImagesAnimationContainer);
-  
-        var left = Math.abs(Math.floor( (width - (boxes_x * imageWidthPadded) ) / 2 ))
-        var new_width = width + (imageWidthPadded *2)
-  
-        View.twinkleContainer.css('height', height + 'px')
-        backgroundImagesContainer.css('top', '-' + (height + 60) + 'px')
-        backgroundImagesContainer.css('left', '-' + left + 'px')
-        backgroundImagesContainer.css('width', new_width + 'px')
+        var backgroundImagesContainer = Controller.getContainer(backgroundImagesContainer, View.backgroundImagesAnimationContainer);
   
         var backgroundImages = Controller.getContainers('background-images', backgroundImagesContainer, boxes_count)
   
@@ -114,21 +112,37 @@ var starTwinkle = (function () {
         return '.background-images { width: '+ starWidth +'px; height: '+ starHeight +'px; background-image: url("'+ imageUrl +'"); margin: '+ starMarginTop +'px '+ starMarginRight +'px '+ starMarginBottom +'px '+ starMarginLeft +'px; }'
       },
       createCssClasses: function createCssClasses() {
-        console.log('In createCssClasses()')
+        var backgroundImagesContainer = 'background-images-animated-container'
+        var heightCssContainer = parseInt($(Model.cssContainer).height())
+        var outerHeightCssContainer = parseInt($(Model.cssContainer).outerHeight())
+        var topBackgroundImageContainer = parseInt($(Model.cssContainer).css("margin-top")) + parseInt($(Model.cssContainer).css("padding-top"))
+
         var styleHtml = '<style type="text/css"> '
+        
+        var backgroundImagesContainerCss=  '.' + backgroundImagesContainer +' {height: '+ outerHeightCssContainer +'px; top:-'+ (topBackgroundImageContainer+50 )+'px; width: 110%;}'
+        styleHtml += backgroundImagesContainerCss
+
+        var backgroundDataContainerCss=  Model.cssContainerData +' {position: relative; top: -'+ outerHeightCssContainer +'px;}'
+        styleHtml += backgroundDataContainerCss
+
+        var containerCss=  Model.cssContainer +' {height: '+ heightCssContainer +'px;}'
+        styleHtml += containerCss
+
+        
         styleHtml += Controller.createBackgroundImagesCss(Model.starWidth, Model.starHeight, Model.imageUrl, Model.starMarginTop, Model.starMarginRight, Model.starMarginBottom, Model.starMarginLeft)
         styleHtml += Controller.darkModeCss(Controller.createBackgroundImagesCss(Model.starWidth, Model.starHeight, Model.imageDarkUrl, Model.starMarginTop, Model.starMarginRight, Model.starMarginBottom, Model.starMarginLeft))
         for(var i=0; i< Model.starImageCount; i++) {
           var styleCss = '.star-image-count-'+ i +'{ background-position: -' + Model.starWidth * i + 'px 0px; } '
           styleHtml += styleCss
         }
+
         styleHtml += '</style>'
         $(styleHtml).appendTo("head");
       },
       init: function init(config) {
         Model = config
-        Controller.createCssClasses()
         console.log('In init('+ JSON.stringify(config) +')')
+        Controller.createCssClasses()
         Controller.makeItTwinkle()
       }
     }

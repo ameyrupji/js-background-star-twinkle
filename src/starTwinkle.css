@@ -1,24 +1,7 @@
-.background-images-animation-container {
-    display:block;
-}
-
-.background-images-container {
+.background-images-animated-container {
     display: block;
     position: relative;
-    top: 0px;
-    left: 0px;
-    z-index: 99;
-    top: -300px;
-    margin: 0 auto;
-}
-
-.data-container {
-    display: block;
-    position: relative;
-    top: 0px;
-    left: 0px;
-    z-index: 100;
-    margin: 100px 30px;
+    left: 0;
 }
 
 .background-images {

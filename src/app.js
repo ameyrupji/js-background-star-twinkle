@@ -1,5 +1,7 @@
 $(document).ready(function() {
   starTwinkle.init({
+    cssContainer: "#some-container",
+    cssContainerData: ".data-container",
     activeBoxesPercentage: 20,
     starWidth: 100,
     starHeight: 100,
