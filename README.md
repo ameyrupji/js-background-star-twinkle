@@ -45,7 +45,9 @@ An example of this can be found in the `src/app.js` file.
 ## Demo Links
 
 Latest   - https://ameyrupji.github.io/js-background-star-twinkle/src/
+
 v1.0.0   - https://ameyrupji.github.io/js-background-star-twinkle/src/v1-0-0/
+
 JSFiddle - http://jsfiddle.net/fh4Lds51/
 
 ## Sample Output
