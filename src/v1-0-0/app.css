@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+}
+  
+#previous-container, 
+#next-container {
+    background-color: #777;
+    color: #fff;
+    display: block;
+    min-height: 200px;
+    padding: 20px 10px;
+}
+
+#some-container {
+    background-color: #eee;
+    color: #333;
+    border-top: 3px solid #aaa;
+    border-bottom: 3px solid #aaa;
+    display: block;
+    min-height: 200px;
+    padding: 0;
+    overflow: hidden;
+    padding-top: 150px;
+    padding-bottom: 100px;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    #some-container {
+        background-color: #161719
+    }
+}
+
+
+.data-container {
+    z-index: 100;
+    margin: 0 200px;
+}
